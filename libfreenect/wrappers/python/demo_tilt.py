@@ -12,7 +12,7 @@ def body(dev, ctx):
     global last_time
     if not keep_running:
         raise freenect.Kill
-    if time.time() - last_time < 3:
+    if time.time() - last_time < 1:
         return
     last_time = time.time()
     led = random.randint(0, 6)
