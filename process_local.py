@@ -13,11 +13,21 @@ All the above steps should be in one function called process_image()
 """
 
 # TODO: Import OpenCV
-
+import cv2
 
 # TODO: Edit this function
 def process_image():
-    return
+    img = cv2.imread('geisel.jpg',0)
+    height = int(img.shape[0]/2)
+    width = int(img.shape[1]/2)
+    dim = (width, height)
+    resized = cv2.resize(img, dim)
+    start_point = (int(resized.shape[1]/2)-50, int(resized.shape[0]/2)-50)
+    end_point = (int(resized.shape[1]/2)+50, int(resized.shape[0]/2)+50)
+    color = (255,255,255)
+    thickness = 5
+    resized = cv2.rectangle(resized, start_point, end_point, color, thickness)
+    cv2.imwrite("resized.jpg", resized)
 
 # Just prints 'Hello World! to screen.
 def hello_world():
@@ -27,6 +37,7 @@ def hello_world():
 # TODO: Call process_image function.
 def main():
     hello_world()
+    process_image()
     return
 
 
