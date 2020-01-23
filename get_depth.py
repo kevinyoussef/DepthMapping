@@ -11,11 +11,18 @@ cv2.namedWindow("DEPTH")
 print('Press ESC in window to stop')
 
 def get_depth():
-     print(frame_convert2.pretty_depth_cv(freenect.sync_get_depth()[0]))
      return frame_convert2.pretty_depth_cv(freenect.sync_get_depth()[0])
 
 while 1:
-    cv2.imshow('Depth', get_depth())
-    if cv2.waitKey(10) == 27:
+    img = get_depth()
+    cv2.imshow('Depth', img)
+    if cv2.waitKey(1) == 112:
+        print("screenshot taken")
+        print("Enter filename")
+        title = input()
+        cv2.imwrite(title + '.png', img)
+
+    if cv2.waitKey(5) == 27:
         break
+
 
