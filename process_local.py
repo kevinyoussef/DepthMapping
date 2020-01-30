@@ -17,7 +17,7 @@ import cv2
 
 # TODO: Edit this function
 def process_image():
-    img = cv2.imread('geisel.jpg',0)
+    img = cv2.imread('g eisel.jpg',0)
     height = int(img.shape[0]/2)
     width = int(img.shape[1]/2)
     dim = (width, height)
