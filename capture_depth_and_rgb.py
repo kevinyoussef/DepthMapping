@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import numpy as np
 import cv2
 from libfreenect.wrappers.python import frame_convert2
 import freenect
@@ -8,6 +8,7 @@ import csv
 
 def get_depth():
      return freenect.sync_get_depth()[0]
+    
 
 def get_video():
     return freenect.sync_get_video()[0]
@@ -29,6 +30,11 @@ def main():
         cv2.imshow('Video', rgbIMG)
         if cv2.waitKey(1) == 112:
             break
+    print("depth")
+    print(depth)
+    print(np.max(get_depth()))
+    print(np.max(depth))
+
     #freenect.close_device(device)
     print("screenshot taken")
     print("Enter filename")
@@ -53,8 +59,13 @@ def main():
     print(f'\n \n \n \n \n  DONE 2 \n \n \n \n \n')
 
     os.chdir(path)
-
-
+    print("depth")
+    print(depth)
+    print(np.max(get_depth()))
+    print(np.max(depth))
+    print("RGB")
+    print(RGB)
+    print(np.max(RGB))
 
 
 if __name__ == '__main__':
