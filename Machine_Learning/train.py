@@ -52,7 +52,7 @@ def load_model(num_classes):
 	model = Sequential()
 
 	# TODO: add a 2D convolution layer with 32 filters, and 6x6 kernal, make this the input layer
-	model.add(layers.Conv2D(32, (6,6)))
+	model.add(layers.Conv2D(32, (6,6), input_shape = (DEFAULT_WIDTH, DEFAULT_HEIGHT,1)))
 	# TODO: add a relu activation layer
 	model.add(layers.Activation('relu'))
 	# TODO: add a batch normalization layer
