@@ -60,7 +60,7 @@ def load_model(num_classes):
 	# TODO: add a 2D max pooling layer with 2x2 kernal
 	model.add(layers.MaxPool2D((2,2)))
 	# TODO: add a flatten layer
-	model.add(layers.Flatten)
+	model.add(layers.Flatten())
 	# TODO: add a fully-connected layer with 32 units and relu activation function
 	model.add(layers.Dense(32, activation='relu'))
 	# TODO: add a dropout layer with 30% drop rate
