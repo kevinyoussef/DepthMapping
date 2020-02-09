@@ -1,7 +1,9 @@
 from __future__ import print_function
 import os
 import numpy as np
-
+from keras import layers
+from keras.models import Sequential
+from keras.layers import Dense
 DEFAULT_WIDTH = 32
 DEFAULT_HEIGHT = 32
 
@@ -50,13 +52,19 @@ def load_model(num_classes):
 	model = Sequential()
 
 	# TODO: add a 2D convolution layer with 32 filters, and 6x6 kernal, make this the input layer
+	model.add(layers.Conv2D(32, (6,6)))
 	# TODO: add a relu activation layer
+	model.add(layers.Activation('relu'))
 	# TODO: add a batch normalization layer
+	model.add(layers.BatchNormalization())
 	# TODO: add a 2D max pooling layer with 2x2 kernal
-
+	model.add(layers.MaxPool2D((2,2)))
 	# TODO: add a flatten layer
+	model.add(layers.Flatten)
 	# TODO: add a fully-connected layer with 32 units and relu activation function
+	model.add(layers.Dense(32, activation='relu'))
 	# TODO: add a dropout layer with 30% drop rate
+	model.add(layers.Dropout(rate = 0.3))
 
 	model.add(Dense(num_classes, activation = 'softmax'))
 	model.summary()
