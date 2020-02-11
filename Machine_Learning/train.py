@@ -191,7 +191,7 @@ def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 12
 	# stocastic gradient descent optomizer with learning rate specified by 
 	# the input parameter and 'accuracy' metrics
 	
-    sgd = optimizers.SGD(lr=learningRate, decay=lr_decay, momentum=0.9, nesterov=True)
+    sgd = optimizers.SGD(lr=learningRate, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy', optimizer=sgd,metrics=['accuracy'])
 
 	# TODO: train the model with (x_test, y_test) as validation data, with other hyper-parameters defined
