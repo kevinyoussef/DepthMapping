@@ -6,6 +6,7 @@ from keras import layers
 from keras.models import Sequential
 from keras.layers import Dense
 import cv2
+from cv2 import imread
 
 DEFAULT_WIDTH = 32
 DEFAULT_HEIGHT = 32
