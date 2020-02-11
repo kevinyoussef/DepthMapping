@@ -137,14 +137,13 @@ def train_model(model, xTrain, yTrain, xTest, yTest,
 	#TODO: compile the model with 'categorical_crossentropy' as loss function and
 	#			stocastic gradient descent optomizer with learning rate specified by 
 	#			the input parameter and 'accuracy' metrics
-	learningRate
 	sgd = optimizers.SGD(lr=learningRate)
     model.compile(loss='categorical_crossentropy', optimizer=sgd,metrics=['accuracy'])
 	# TODO: train the model with (x_test, y_test) as validation data, with other hyper-parameters defined
 	#			by the inputs to this function call
-
+	model.fit(x_train, y_train, batch_size=batchSize, epochs=max_epoches, validation_data=(x_test, y_test))
 	# TODO: save model weight to the file specified by the 'outFile' parameter
-
+	model.save_weights(outFile)
 	return model
 
 
@@ -160,16 +159,13 @@ if __name__ == '__main__':
 	(x_train, y_train), (x_test, y_test), num_classes = load_data(path = dataset_path)
 
 	# TODO: remove exit(-1) when load_data() is completed
-	exit(-1)
 
 
 	# TODO: remove exit(-1) once load_model() is completed
 	model = load_model(num_classes) 
-	# exit(-1)
 
 	# TODO: remove exit(-1) once train_model() is completed
 	model = train_model(model, x_train, y_train, x_test, y_test, num_classes)
-	exit(-1)
 
 	predicted_x = model.predict(x_test)
 	residuals = np.argmax(predicted_x,1)==y_test
