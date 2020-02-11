@@ -147,14 +147,9 @@ def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 12
     model.fit(x_train, y_train, batch_size=batchSize, epochs=max_epoches, validation_data=(x_test, y_test))
 
 	# TODO: save model weight to the file specified by the 'outFile' parameter
-<<<<<<< HEAD
 
 	model.save_weights(outFile)
 	return model
-=======
-    model.save_weights(outFile)
-    return model
->>>>>>> f037523936df4684808c59c5a28bbc5bd016c093
 
 
 if __name__ == '__main__':
