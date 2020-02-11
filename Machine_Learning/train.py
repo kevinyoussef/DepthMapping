@@ -2,7 +2,7 @@ from __future__ import print_function
 import os
 import numpy as np
 import keras
-from keras import layers
+from keras import layers, optimizers
 from keras.models import Sequential
 from keras.layers import Dense
 import cv2
