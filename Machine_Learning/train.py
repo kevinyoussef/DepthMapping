@@ -65,7 +65,7 @@ def load_model(num_classes):
 	# TODO: add a 2D max pooling layer with 2x2 kernal
 	model.add(layers.MaxPool2D((2,2)))
 	# TODO: add a flatten layer
-	model.add(layers.Flatten)
+	model.add(layers.Flatten())
 	# TODO: add a fully-connected layer with 32 units and relu activation function
 	model.add(layers.Dense(32, activation='relu'))
 	# TODO: add a dropout layer with 30% drop rate
@@ -136,12 +136,11 @@ if __name__ == '__main__':
 	(x_train, y_train), (x_test, y_test), num_classes = load_data(path = dataset_path)
 
 	# TODO: remove exit(-1) when load_data() is completed
-	exit(-1)
+	
 
 
 	# TODO: remove exit(-1) once load_model() is completed
-	model = load_model(num_classes) 
-	# exit(-1)
+	model = load_model(num_classes)
 
 	# TODO: remove exit(-1) once train_model() is completed
 	model = train_model(model, x_train, y_train, x_test, y_test, num_classes)
