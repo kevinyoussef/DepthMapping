@@ -25,21 +25,45 @@ Return Values:
 	- y_test: labels for the testing set
 	- num_classes: number of classes in the dataset
 '''
-def load_data(path = './dataset/', max_x = DEFAULT_WIDTH, max_y = DEFAULT_HEIGHT, prop = 0.2):
+def load_data(path = './Machine_Learning/dataset/', max_x = DEFAULT_WIDTH, max_y = DEFAULT_HEIGHT, prop = 0.2):
 	x_train = np.empty([0, max_x, max_y, 3])
 	x_test = np.empty([0, max_x, max_y, 3])
-
+	all_data_list = []
+	all_labels_list = []
 	y_train = np.empty([0])
 	y_test = np.empty([0])
-	num_classes = -1
-
+	num_classes = 0
 	for dirpath, dirname, filename in os.walk(path):
+		num_classes += 1
+		this_label_list = []
 		for f in filename:
 			fp = os.path.join(dirpath, f)	# image file
-			print("file: ", fp)
+			#print("file: ", fp)
+			print(dirpath)
+			pic = cv2.imread(fp, 1)
+			pic = cv2.resize(pic, (max_x, max_y))
+			all_data_list.append(pic)
+			name = dirpath.split('/')
+			this_label_list.append(name[-1])
+		all_labels_list.append(this_label_list)
+	all_labels_list.pop(0)
+	all_data = np.array(all_data_list)
+	test_indeces = []
+	shift = 0
+	for i in all_labels_list:
+		test_indeces.append((np.random.choice(len(i), int(prop*len(i)), replace = False)) + shift)
+		shift += len(i)
+	flatten = lambda l: [item for sublist in l for item in sublist]
+	temp = flatten(test_indeces)
+	test_indeces = temp
+	all_labels = np.array(flatten(all_labels_list))
+	x_test = all_data[test_indeces]
+	y_test = all_labels[test_indeces]
 
-	img = cv2.imread(path, 1)
+	train_indeces = [i for i in range(all_data.shape[0]) if i not in test_indeces]
 	
+	x_train = all_data[train_indeces]
+	y_train = all_labels[train_indeces]
 
 	return (x_train, y_train), (x_test, y_test), num_classes
 
@@ -65,7 +89,7 @@ def load_model(num_classes):
 	# TODO: add a 2D max pooling layer with 2x2 kernal
 	model.add(layers.MaxPool2D((2,2)))
 	# TODO: add a flatten layer
-	model.add(layers.Flatten())
+	model.add(layers.Flatten)
 	# TODO: add a fully-connected layer with 32 units and relu activation function
 	model.add(layers.Dense(32, activation='relu'))
 	# TODO: add a dropout layer with 30% drop rate
@@ -113,9 +137,9 @@ def train_model(model, xTrain, yTrain, xTest, yTest,
 	#TODO: compile the model with 'categorical_crossentropy' as loss function and
 	#			stocastic gradient descent optomizer with learning rate specified by 
 	#			the input parameter and 'accuracy' metrics
-	
-	keras.losses.categorical_crossentropy(y_true, y_pred, from_logits=False, label_smoothing=0)
-
+	learningRate
+	sgd = optimizers.SGD(lr=learningRate)
+    model.compile(loss='categorical_crossentropy', optimizer=sgd,metrics=['accuracy'])
 	# TODO: train the model with (x_test, y_test) as validation data, with other hyper-parameters defined
 	#			by the inputs to this function call
 
@@ -136,11 +160,12 @@ if __name__ == '__main__':
 	(x_train, y_train), (x_test, y_test), num_classes = load_data(path = dataset_path)
 
 	# TODO: remove exit(-1) when load_data() is completed
-	
+	exit(-1)
 
 
 	# TODO: remove exit(-1) once load_model() is completed
-	model = load_model(num_classes)
+	model = load_model(num_classes) 
+	# exit(-1)
 
 	# TODO: remove exit(-1) once train_model() is completed
 	model = train_model(model, x_train, y_train, x_test, y_test, num_classes)
