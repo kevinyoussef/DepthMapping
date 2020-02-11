@@ -28,7 +28,7 @@ Return Values:
 '''
 
 
-def load_data(self, path = './dataset/', max_x = 32, max_y = 32, prop = 0.2):
+def load_data(path = './dataset/', max_x = 32, max_y = 32, prop = 0.2):
 #         print("loading dataset")
         
         x_train = np.empty([0, max_x, max_y, 3])
