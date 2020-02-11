@@ -33,7 +33,7 @@ def load_data(path = './Machine_Learning/dataset/', max_x = DEFAULT_WIDTH, max_y
 	all_labels_list = []
 	y_train = np.empty([0])
 	y_test = np.empty([0])
-	num_classes = 0
+	num_classes = -1
 	for dirpath, dirname, filename in os.walk(path):
 		num_classes += 1
 		this_label_list = []
@@ -45,7 +45,7 @@ def load_data(path = './Machine_Learning/dataset/', max_x = DEFAULT_WIDTH, max_y
 			pic = cv2.resize(pic, (max_x, max_y))
 			all_data_list.append(pic)
 			name = dirpath.split('/')
-			this_label_list.append(name[-1])
+			this_label_list.append(num_classes)
 		all_labels_list.append(this_label_list)
 	all_labels_list.pop(0)
 	all_data = np.array(all_data_list)
@@ -120,8 +120,7 @@ Parameters:
 Return Value:
 	- model: trained model
 '''
-def train_model(model, xTrain, yTrain, xTest, yTest,
-		num_classes, batchSize = 128, max_epoches = 250,learningRate = 0.001, outFile = 'personal_train.h5'):
+def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 128, max_epoches = 250,learningRate = 0.001, outFile = 'personal_train.h5'):
 	
 	batch_size = batchSize
 	maxepoches = max_epoches
@@ -138,12 +137,17 @@ def train_model(model, xTrain, yTrain, xTest, yTest,
 	#TODO: compile the model with 'categorical_crossentropy' as loss function and
 	# stocastic gradient descent optomizer with learning rate specified by 
 	# the input parameter and 'accuracy' metrics
-    sgd = optimizers.SGD(lr=learningRate)
+	
+	sgd = optimizers.SGD(lr=learningRate)
     model.compile(loss='categorical_crossentropy', optimizer=sgd,metrics=['accuracy'])
+
 	# TODO: train the model with (x_test, y_test) as validation data, with other hyper-parameters defined
 	#			by the inputs to this function call
+
     model.fit(x_train, y_train, batch_size=batchSize, epochs=max_epoches, validation_data=(x_test, y_test))
+
 	# TODO: save model weight to the file specified by the 'outFile' parameter
+
 	model.save_weights(outFile)
 	return model
 
