@@ -1,6 +1,7 @@
 from __future__ import print_function
 import os
 import numpy as np
+import keras
 from keras import layers
 from keras.models import Sequential
 from keras.layers import Dense
@@ -89,7 +90,7 @@ def load_model(num_classes):
 	# TODO: add a 2D max pooling layer with 2x2 kernal
 	model.add(layers.MaxPool2D((2,2)))
 	# TODO: add a flatten layer
-	model.add(layers.Flatten)
+	model.add(layers.Flatten())
 	# TODO: add a fully-connected layer with 32 units and relu activation function
 	model.add(layers.Dense(32, activation='relu'))
 	# TODO: add a dropout layer with 30% drop rate
@@ -132,16 +133,16 @@ def train_model(model, xTrain, yTrain, xTest, yTest,
 	x_test = x_test.astype('float32')
 
 	y_train = keras.utils.to_categorical(y_train, num_classes)
-	y_test = keras.utils.to_categorical(y_test, num_classes)
+        y_test = keras.utils.to_categorical(y_test, num_classes)
 		
 	#TODO: compile the model with 'categorical_crossentropy' as loss function and
-	#			stocastic gradient descent optomizer with learning rate specified by 
-	#			the input parameter and 'accuracy' metrics
-	sgd = optimizers.SGD(lr=learningRate)
-    model.compile(loss='categorical_crossentropy', optimizer=sgd,metrics=['accuracy'])
+	# stocastic gradient descent optomizer with learning rate specified by 
+	# the input parameter and 'accuracy' metrics
+        sgd = optimizers.SGD(lr=learningRate)
+        model.compile(loss='categorical_crossentropy', optimizer=sgd,metrics=['accuracy'])
 	# TODO: train the model with (x_test, y_test) as validation data, with other hyper-parameters defined
 	#			by the inputs to this function call
-	model.fit(x_train, y_train, batch_size=batchSize, epochs=max_epoches, validation_data=(x_test, y_test))
+        model.fit(x_train, y_train, batch_size=batchSize, epochs=max_epoches, validation_data=(x_test, y_test))
 	# TODO: save model weight to the file specified by the 'outFile' parameter
 	model.save_weights(outFile)
 	return model
