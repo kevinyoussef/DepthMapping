@@ -26,6 +26,58 @@ Return Values:
 	- y_test: labels for the testing set
 	- num_classes: number of classes in the dataset
 '''
+
+
+    def load_data(self, path = './dataset/', max_x = 32, max_y = 32, prop = 0.2):
+#         print("loading dataset")
+        
+        x_train = np.empty([0, max_x, max_y, 3])
+        x_test = np.empty([0, max_x, max_y, 3])
+        
+        y_train = np.empty([0])
+        y_test = np.empty([0])
+        label = -1
+        
+        for dirpath, dirname, filename in os.walk(path):
+                x_data = []
+                y_data = []
+                for f in filename:
+                        fp = os.path.join(dirpath, f)	# image file
+                        image = imread(fp)
+                        print("loading file: ", fp)
+                        image = cv2.resize(image, (max_y,max_x))
+                        
+                        if len(image.shape) == 3:
+                            # image is rgb
+                            x_data.append(image)
+                            y_data.append(label)
+                
+                if label != -1:
+                    x_data = np.array(x_data)
+                    y_data = np.array(y_data)
+                    num_of_image = x_data.shape[0]
+                    
+                    num_of_test = int(num_of_image * prop)
+                    num_of_train = num_of_image - num_of_test
+                    
+                    x_data_train = x_data[0:num_of_train, :]
+                    x_data_test = x_data[num_of_train:, :]
+                    
+                    y_data_train = y_data[0:num_of_train]
+                    y_data_test = y_data[num_of_train:]
+                    
+                    x_train = np.concatenate((x_train, x_data_train), axis = 0)
+                    x_test = np.concatenate((x_test, x_data_test), axis = 0)
+                    
+                    y_train = np.concatenate((y_train, y_data_train), axis = 0)
+                    y_test = np.concatenate((y_test, y_data_test), axis = 0)
+                    
+        
+                label += 1
+        
+        return (x_train, y_train), (x_test, y_test), label
+'''
+
 def load_data(path = './Machine_Learning/dataset/', max_x = DEFAULT_WIDTH, max_y = DEFAULT_HEIGHT, prop = 0.2):
 	x_train = np.empty([0, max_x, max_y, 3])
 	x_test = np.empty([0, max_x, max_y, 3])
@@ -67,8 +119,7 @@ def load_data(path = './Machine_Learning/dataset/', max_x = DEFAULT_WIDTH, max_y
 	y_train = all_labels[train_indeces]
 
 	return (x_train, y_train), (x_test, y_test), num_classes
-
-
+'''
 
 ''' 
 Function Name: load_model()
