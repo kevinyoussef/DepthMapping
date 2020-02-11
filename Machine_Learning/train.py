@@ -184,8 +184,8 @@ def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 12
     x_test = x_test.astype('float32')
     print("y train max")
     print(np.max(y_train))   
-    y_train = keras.utils.to_categorical(y_train, num_classes-1)
-    y_test = keras.utils.to_categorical(y_test, num_classes-1)
+    y_train = keras.utils.to_categorical(y_train, num_classes)
+    y_test = keras.utils.to_categorical(y_test, num_classes)
 		
 	#TODO: compile the model with 'categorical_crossentropy' as loss function and
 	# stocastic gradient descent optomizer with learning rate specified by 
