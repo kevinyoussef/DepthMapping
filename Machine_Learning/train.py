@@ -192,7 +192,19 @@ def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 12
 	# stocastic gradient descent optomizer with learning rate specified by 
 	# the input parameter and 'accuracy' metrics
 	
-	datagen = ImageDataGenerator(featurewise_center=False, samplewise_center=False,featurewise_std_normalization=False, samplewise_std_normalization=False, zca_whitening=False, rotation_range=15, width_shift_range=0.1,  height_shift_range=0.1, horizontal_flip=True,  vertical_flip=False)  
+
+	datagen = ImageDataGenerator(
+		featurewise_center=False,  # set input mean to 0 over the dataset
+		samplewise_center=False,  # set each sample mean to 0
+		featurewise_std_normalization=False,  # divide inputs by std of the dataset
+		samplewise_std_normalization=False,  # divide each input by its std
+		zca_whitening=False,  # apply ZCA whitening
+		rotation_range=15,  # randomly rotate images in the range (degrees, 0 to 180)
+		width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
+		height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
+		horizontal_flip=True,  # randomly flip images
+		vertical_flip=False)
+
     datagen.fit(x_train)
 
 
