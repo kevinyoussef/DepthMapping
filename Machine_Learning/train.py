@@ -3,6 +3,7 @@ import os
 import numpy as np
 import keras
 from keras import layers, optimizers
+from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Dense
 import cv2
@@ -191,13 +192,32 @@ def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 12
 	# stocastic gradient descent optomizer with learning rate specified by 
 	# the input parameter and 'accuracy' metrics
 	
+	datagen = ImageDataGenerator(
+            featurewise_center=False,  # set input mean to 0 over the dataset
+            samplewise_center=False,  # set each sample mean to 0
+            featurewise_std_normalization=False,  # divide inputs by std of the dataset
+            samplewise_std_normalization=False,  # divide each input by its std
+            zca_whitening=False,  # apply ZCA whitening
+            rotation_range=15,  # randomly rotate images in the range (degrees, 0 to 180)
+            width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
+            height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
+            horizontal_flip=True,  # randomly flip images
+            vertical_flip=False)  # randomly flip images
+        # (std, mean, and principal components if ZCA whitening is applied).
+        datagen.fit(x_train)
+
+
     sgd = optimizers.SGD(lr=learningRate, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy', optimizer=sgd,metrics=['accuracy'])
 
 	# TODO: train the model with (x_test, y_test) as validation data, with other hyper-parameters defined
 	#			by the inputs to this function call
 
-    model.fit(x_train, y_train, batch_size=batchSize, epochs=max_epoches, validation_data=(x_test, y_test))
+	historytemp = model.fit_generator(datagen.flow(x_train, y_train,
+                                         batch_size=batch_size),
+                            steps_per_epoch=x_train.shape[0] // batch_size,
+                            epochs=maxepoches, 
+                            validation_data=(x_test, y_test),callbacks=[reduce_lr],verbose=1)
 
 	# TODO: save model weight to the file specified by the 'outFile' parameter
 
