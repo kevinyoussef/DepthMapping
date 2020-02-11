@@ -138,7 +138,7 @@ def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 12
 	# stocastic gradient descent optomizer with learning rate specified by 
 	# the input parameter and 'accuracy' metrics
 	
-	sgd = optimizers.SGD(lr=learningRate)
+    sgd = optimizers.SGD(lr=learningRate, decay=lr_decay, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy', optimizer=sgd,metrics=['accuracy'])
 
 	# TODO: train the model with (x_test, y_test) as validation data, with other hyper-parameters defined
@@ -148,8 +148,8 @@ def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 12
 
 	# TODO: save model weight to the file specified by the 'outFile' parameter
 
-	model.save_weights(outFile)
-	return model
+    model.save_weights(outFile)
+    return model
 
 
 if __name__ == '__main__':
