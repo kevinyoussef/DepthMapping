@@ -4,6 +4,8 @@ import numpy as np
 from keras import layers
 from keras.models import Sequential
 from keras.layers import Dense
+import cv2
+
 DEFAULT_WIDTH = 32
 DEFAULT_HEIGHT = 32
 
@@ -35,6 +37,9 @@ def load_data(path = './dataset/', max_x = DEFAULT_WIDTH, max_y = DEFAULT_HEIGHT
 		for f in filename:
 			fp = os.path.join(dirpath, f)	# image file
 			print("file: ", fp)
+
+	img = cv2.imread(path, 1)
+	
 
 	return (x_train, y_train), (x_test, y_test), num_classes
 
@@ -108,6 +113,8 @@ def train_model(model, xTrain, yTrain, xTest, yTest,
 	#TODO: compile the model with 'categorical_crossentropy' as loss function and
 	#			stocastic gradient descent optomizer with learning rate specified by 
 	#			the input parameter and 'accuracy' metrics
+	
+	keras.losses.categorical_crossentropy(y_true, y_pred, from_logits=False, label_smoothing=0)
 
 	# TODO: train the model with (x_test, y_test) as validation data, with other hyper-parameters defined
 	#			by the inputs to this function call
