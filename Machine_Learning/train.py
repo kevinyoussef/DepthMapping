@@ -204,7 +204,7 @@ def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 12
             horizontal_flip=True,  # randomly flip images
             vertical_flip=False)  # randomly flip images
         # (std, mean, and principal components if ZCA whitening is applied).
-        datagen.fit(x_train)
+     datagen.fit(x_train)
 
 
     sgd = optimizers.SGD(lr=learningRate, momentum=0.9, nesterov=True)
