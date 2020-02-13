@@ -295,7 +295,7 @@ class cifar10vgg:
                             epochs=maxepoches, 
                             validation_data=(x_test, y_test),callbacks=[reduce_lr],verbose=1)
         print(f'xtrain shape = {x_train.shape}')
-	    print(f'ytrain shape = {y_train.shape}')
+        print(f'ytrain shape = {y_train.shape}')
         
 #         model.save_weights('cifar10vgg.h5')
         model.save_weights('personal_train.h5')
