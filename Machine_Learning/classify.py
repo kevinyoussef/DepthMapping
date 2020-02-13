@@ -129,7 +129,7 @@ if __name__ == '__main__':
 			file_list.append(fp)
 
     # TODO: load data
-	image = cv2.imread(file_list[0])
+	image = cv2.imread(file_list[1])
 
 	if image is None:
 		print("Image is of type None")
@@ -142,5 +142,5 @@ if __name__ == '__main__':
 	# TODO: classify data
 	predicted_values = model.predict(image) # sum of every element adds up to 1
 	result = classes[np.argmax(predicted_values, axis = 1)[0] + 1] 
-	print(f'file_list[0] = {file_list[0]}')
+	print(f'file_list[0] = {file_list[1]}')
 	print(result)
