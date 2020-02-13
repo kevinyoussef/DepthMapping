@@ -117,7 +117,7 @@ if __name__ == '__main__':
 	for i in classes:
 		print(i)
 
-	model_path = '.\\Machine_Learning\\personal_train.h5'
+	model_path = '.\\personal_train.h5'
    	# TODO: build model and load weights 
 	model = build_model(num_classes)
 	model.load_weights(model_path)
