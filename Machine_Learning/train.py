@@ -174,36 +174,43 @@ Return Value:
 '''
 def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 128, max_epoches = 250,learningRate = 0.001, outFile = 'personal_train.h5'):
 	
-    batch_size = batchSize
-    maxepoches = max_epoches
-    learning_rate = learningRate
+	batch_size = batchSize
+	maxepoches = max_epoches
+	learning_rate = learningRate
 	x = np.arange(5)
-    (x_train, y_train), (x_test, y_test) = (xTrain, yTrain),(xTest, yTest)
+	(x_train, y_train), (x_test, y_test) = (xTrain, yTrain),(xTest, yTest)
 
-    x_train = x_train.astype('float32')
-    x_test = x_test.astype('float32')
-    print("y train max")
-    print(np.max(y_train))   
-    y_train = keras.utils.to_categorical(y_train, num_classes)
-    y_test = keras.utils.to_categorical(y_test, num_classes)
+	x_train = x_train.astype('float32')
+	x_test = x_test.astype('float32')
+	print("y train max")
+	print(np.max(y_train))   
+	y_train = keras.utils.to_categorical(y_train, num_classes)
+	y_test = keras.utils.to_categorical(y_test, num_classes)
 		
 	#TODO: compile the model with 'categorical_crossentropy' as loss function and
 	# stocastic gradient descent optomizer with learning rate specified by 
 	# the input parameter and 'accuracy' metrics
 	
 	
-    sgd = optimizers.SGD(lr=learningRate, momentum=0.9, nesterov=True)
-    model.compile(loss='categorical_crossentropy', optimizer=sgd,metrics=['accuracy'])
+	sgd = optimizers.SGD(lr=learningRate, momentum=0.9, nesterov=True)
+	model.compile(loss='categorical_crossentropy', optimizer=sgd,metrics=['accuracy'])
 
 	# TODO: train the model with (x_test, y_test) as validation data, with other hyper-parameters defined
 	#			by the inputs to this function call
 
-    model.fit(x_train, y_train, batch_size=batchSize, epochs=max_epoches, validation_data=(x_test, y_test))
+
+	historytemp = model.fit_generator(datagen.flow(x_train, y_train,
+									batch_size=batch_size),
+							steps_per_epoch=x_train.shape[0] // batch_size,
+							epochs=maxepoches, 
+							validation_data=(x_test, y_test),callbacks=[reduce_lr],verbose=1)
+
+	# model.fit(x_train, y_train, batch_size=batchSize, epochs=max_epoches, validation_data=(x_test, y_test))
 
 	# TODO: save model weight to the file specified by the 'outFile' parameter
 
-    model.save_weights(outFile)
-    return model
+	model.save_weights(outFile)
+	return model
 
 
 if __name__ == '__main__':
