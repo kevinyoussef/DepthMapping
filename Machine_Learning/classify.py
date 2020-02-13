@@ -110,7 +110,8 @@ if __name__ == '__main__':
 	dataset_path = 'C:\\Users\\kevin\\Desktop\\ECE 196\\DepthMapping\\Machine_Learning\\dataset'
 	# TODO: get labels for each class and the total number 
 	classes = [x[0] for x in os.walk(dataset_path)]
-	num_classes = len(classes) - 1
+	print(classes)
+	num_classes = 3
 
 	print("number of classes = ", num_classes)    
 	for i in classes:
