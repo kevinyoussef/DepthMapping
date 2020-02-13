@@ -142,5 +142,5 @@ if __name__ == '__main__':
 	# TODO: classify data
 	predicted_values = model.predict(image) # sum of every element adds up to 1
 	result = classes[np.argmax(predicted_values, axis = 1)[0] + 1] 
-
+	print(f'file_list[0] = {file_list[0]}')
 	print(result)
