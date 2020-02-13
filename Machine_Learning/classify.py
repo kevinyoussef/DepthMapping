@@ -112,7 +112,7 @@ if __name__ == '__main__':
 	classes = [x[0] for x in os.walk(dataset_path)]
 	print(classes)
 	num_classes = 4
-	path = './Machine_Learning/dataset/'
+	path = './dataset/'
 	print("number of classes = ", num_classes)    
 	for i in classes:
 		print(i)
