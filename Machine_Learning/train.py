@@ -7,6 +7,10 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D, BatchNormalization
 from keras.preprocessing.image import ImageDataGenerator
+from keras import regularizers
+from keras import backend as K
+from keras.layers.core import Lambda
+
 import cv2
 from cv2 import imread
 
