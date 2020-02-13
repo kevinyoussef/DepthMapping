@@ -132,14 +132,15 @@ Return Value:
 	- model: object contraining the model, with weights loaded
 '''
 
-def load_model(self):
+def load_model():
 	# Build the network of vgg for 10 classes with massive dropout and weight decay as described in the paper.
-
+	x_shape = [32,32,3]
+	weight_decay = 0.0005
 	model = Sequential()
-	weight_decay = self.weight_decay
+	weight_decay = weight_decay
 
 	model.add(Conv2D(64, (3, 3), padding='same',
-						input_shape=self.x_shape,kernel_regularizer=regularizers.l2(weight_decay)))
+						input_shape=x_shape,kernel_regularizer=regularizers.l2(weight_decay)))
 	model.add(Activation('relu'))
 	model.add(BatchNormalization())
 	model.add(Dropout(0.3))
@@ -218,7 +219,7 @@ def load_model(self):
 	model.add(BatchNormalization())
 
 	model.add(Dropout(0.5))
-	model.add(Dense(self.num_classes))
+	model.add(Dense(num_classes))
 	model.add(Activation('softmax'))
 	return model
 
