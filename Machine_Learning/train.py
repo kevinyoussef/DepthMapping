@@ -4,7 +4,8 @@ import numpy as np
 import keras
 from keras import layers, optimizers
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Conv2D, MaxPooling2D, BatchNormalization
 from keras.preprocessing.image import ImageDataGenerator
 import cv2
 from cv2 import imread
