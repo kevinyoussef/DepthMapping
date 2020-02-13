@@ -124,8 +124,7 @@ if __name__ == '__main__':
 	
 	file_list = []
 	for dirpath, dirname, filename in os.walk(path):
-		num_classes += 1
-		this_label_list = []
+		print('first loop')
 		for f in filename:
 			fp = os.path.join(dirpath, f)	# image file
 			file_list.append(fp)
