@@ -107,12 +107,11 @@ def build_model(num_classes):
 	return model
 
 if __name__ == '__main__':
-	dataset_path = 'C:\\Users\\kevin\\Desktop\\ECE 196\\DepthMapping\\Machine_Learning\\dataset'
+	dataset_path = './dataset/'
 	# TODO: get labels for each class and the total number 
 	classes = [x[0] for x in os.walk(dataset_path)]
 	print(classes)
 	num_classes = 4
-	path = './dataset/'
 	print("number of classes = ", num_classes)    
 	for i in classes:
 		print(i)
@@ -123,7 +122,7 @@ if __name__ == '__main__':
 	model.load_weights(model_path)
 	
 	file_list = []
-	for dirpath, dirname, filename in os.walk(path):
+	for dirpath, dirname, filename in os.walk(dataset_path):
 		print('first loop')
 		for f in filename:
 			fp = os.path.join(dirpath, f)	# image file
