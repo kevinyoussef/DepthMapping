@@ -188,6 +188,13 @@ def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 12
 	y_train = keras.utils.to_categorical(y_train, num_classes)
 	y_test = keras.utils.to_categorical(y_test, num_classes)
 		
+
+
+	def lr_scheduler(epoch):
+		return learning_rate * (0.5 ** (epoch // lr_drop))
+	reduce_lr = keras.callbacks.LearningRateScheduler(lr_scheduler)
+
+	
 	#TODO: compile the model with 'categorical_crossentropy' as loss function and
 	# stocastic gradient descent optomizer with learning rate specified by 
 	# the input parameter and 'accuracy' metrics
