@@ -177,7 +177,7 @@ def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 12
     batch_size = batchSize
     maxepoches = max_epoches
     learning_rate = learningRate
-
+	x = np.arange(5)
     (x_train, y_train), (x_test, y_test) = (xTrain, yTrain),(xTest, yTest)
 
     x_train = x_train.astype('float32')
