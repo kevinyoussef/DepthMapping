@@ -133,7 +133,6 @@ if __name__ == '__main__':
 
 	if image is None:
 		print("Image is of type None")
-		continue
 
 	print("File detected!!")
 
