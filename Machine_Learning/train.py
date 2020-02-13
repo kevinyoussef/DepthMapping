@@ -132,7 +132,7 @@ Return Value:
 	- model: object contraining the model, with weights loaded
 '''
 
-def load_model():
+def load_model(num_classes):
 	# Build the network of vgg for 10 classes with massive dropout and weight decay as described in the paper.
 	x_shape = [32,32,3]
 	weight_decay = 0.0005
