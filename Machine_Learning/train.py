@@ -5,6 +5,7 @@ import keras
 from keras import layers, optimizers
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.preprocessing.image import ImageDataGenerator
 import cv2
 from cv2 import imread
 
