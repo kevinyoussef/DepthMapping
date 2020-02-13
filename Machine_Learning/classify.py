@@ -111,7 +111,7 @@ if __name__ == '__main__':
 	# TODO: get labels for each class and the total number 
 	classes = [x[0] for x in os.walk(dataset_path)]
 	print(classes)
-	num_classes = 3
+	num_classes = 4
 
 	print("number of classes = ", num_classes)    
 	for i in classes:
