@@ -108,17 +108,17 @@ def build_model(num_classes):
 
 if __name__ == '__main__':
 	dataset_path = 'C:\\Users\\kevin\\Desktop\\ECE 196\\DepthMapping\\Machine_Learning\\dataset'
-   	# TODO: get labels for each class and the total number 
-    classes = [x[0] for x in os.walk(dataset_path)]
-    num_classes = len(classes) - 1
+	# TODO: get labels for each class and the total number 
+	classes = [x[0] for x in os.walk(dataset_path)]
+	num_classes = len(classes) - 1
 
-    print("number of classes = ", num_classes)    
-    for i in classes:
-        print(i)
-    model_path = './Machine_Learning/personal_train.h5'
+	print("number of classes = ", num_classes)    
+	for i in classes:
+		print(i)
+	model_path = './Machine_Learning/personal_train.h5'
    	# TODO: build model and load weights 
-    model = build_model(num_classes)
-    model.load_weights(model_path)
+	model = build_model(num_classes)
+	model.load_weights(model_path)
 	
 	file_list = []
 	for dirpath, dirname, filename in os.walk(path):
@@ -129,7 +129,7 @@ if __name__ == '__main__':
 			file_list.append(fp)
 
     # TODO: load data
-   	image = cv2.imread(file_list[0])
+	image = cv2.imread(file_list[0])
 
 	if image is None:
 		print("Image is of type None")
