@@ -223,8 +223,6 @@ def train_model(model, xTrain, yTrain, xTest, yTest, num_classes, batchSize = 12
 	print(f'xtrain shape = {x_train.shape}')
 	print(f'ytrain shape = {y_train.shape}')
 
-	print(f'datagen.flow shape = {datagen.flow(x_train, y_train, batch_size=batch_size).shape}')
-
 	
 	historytemp = model.fit_generator(datagen.flow(x_train, y_train,
 									batch_size=batch_size),

@@ -294,8 +294,8 @@ class cifar10vgg:
                             steps_per_epoch=x_train.shape[0] // batch_size,
                             epochs=maxepoches, 
                             validation_data=(x_test, y_test),callbacks=[reduce_lr],verbose=1)
-        
-        print(f'datagen.flow shape = {datagen.flow(x_train, y_train, batch_size=batch_size).shape}')
+        print(f'xtrain shape = {x_train.shape}')
+	    print(f'ytrain shape = {y_train.shape}')
         
 #         model.save_weights('cifar10vgg.h5')
         model.save_weights('personal_train.h5')
